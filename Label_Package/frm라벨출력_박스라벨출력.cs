@@ -12,11 +12,11 @@ using System.Windows.Forms;
 
 namespace Label_Package
 {
-    public partial class frm라벨출력_제품라벨출력 : Form
+    public partial class frm라벨출력_박스라벨출력 : Form
     {
 
         string sql = "";
-        public frm라벨출력_제품라벨출력()
+        public frm라벨출력_박스라벨출력()
         {
             InitializeComponent();
         }
@@ -26,7 +26,7 @@ namespace Label_Package
             Close();
         }
 
-        private void frm라벨출력_제품라벨출력_Load(object sender, EventArgs e)
+        private void frm라벨출력_박스라벨출력_Load(object sender, EventArgs e)
         {
             string d = "";
             this.WindowState = FormWindowState.Maximized;

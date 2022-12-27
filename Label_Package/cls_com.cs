@@ -363,7 +363,7 @@ namespace Label_Package
             DateTime DT;
             DT = DateTime.Now;
             sql = "";
-            sql = sql + " SELECT Convert(nvarchar(10),getdate(),102)  DT_TM ";
+            sql = sql + " SELECT Convert(nvarchar(10),getdate(),121)  DT_TM ";
             DataSet ds = cls_com.Select_Query(sql);
             if (ds == null) return DT;
             if (ds.Tables[0].Rows.Count <= 0)
@@ -378,7 +378,7 @@ namespace Label_Package
         {
             String Dt = "";
             sql = "";
-            sql = sql + " SELECT Convert(nvarchar(19),getdate(),102)  DT_TM ";
+            sql = sql + " SELECT Convert(nvarchar(19),getdate(),121)  DT_TM ";
             DataSet ds = cls_com.Select_Query(sql);
             if (ds == null) return Dt;
             if (ds.Tables[0].Rows.Count <= 0)

@@ -79,6 +79,12 @@
     <Compile Include="frm관리사_제품정의.designer.cs">
       <DependentUpon>frm관리사_제품정의.cs</DependentUpon>
     </Compile>
+    <Compile Include="frm라벨출력_박스라벨출력.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm라벨출력_박스라벨출력.designer.cs">
+      <DependentUpon>frm라벨출력_박스라벨출력.cs</DependentUpon>
+    </Compile>
     <Compile Include="frm라벨출력_제품라벨출력.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -113,6 +119,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frm관리사_제품정의.resx">
       <DependentUpon>frm관리사_제품정의.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frm라벨출력_박스라벨출력.resx">
+      <DependentUpon>frm라벨출력_박스라벨출력.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frm라벨출력_제품라벨출력.resx">
       <DependentUpon>frm라벨출력_제품라벨출력.cs</DependentUpon>
