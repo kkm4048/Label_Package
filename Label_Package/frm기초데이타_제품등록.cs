@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -152,7 +153,8 @@ namespace Label_Package
 
         private void 등록()
         {
-            int i; 
+            int i;
+            string 제품코드 = "";
             sql = " ";
             sql = sql + "EXEC [s_a201_제품_저장] '1'";
             sql = sql + "   ,'" + cmb관리사.Text + "' ";
@@ -174,14 +176,72 @@ namespace Label_Package
                 if (!ds.Tables[0].Rows[0]["msg"].ToString().Equals(""))
                 {
                     MessageBox.Show(ds.Tables[0].Rows[0]["msg"].ToString());
+                } else
+                {
+                    제품코드 = spr0.ActiveSheet.Cells[0, 1].Text;
+                    그림저장2(제품코드, pic사진.Image);
+
                 }
 
             }
             조회();
         }
+        private void 그림저장2(string 제품코드, Image image)
+        {
+            SqlConnection conn = null;
+            SqlCommand cmd = null;
+            SqlParameter pTP = null;
+            SqlParameter p관리사 = null;
+            SqlParameter p거래처 = null;
+            SqlParameter p제품코드 = null;
+            SqlParameter p사진 = null;
+
+            byte[] bytes; ;
+            // byte[] result = null;
+            bytes = cls_com.imageToByteArray(image);
+
+
+
+            //   int i, j;
+
+            try
+            {
+                conn = new SqlConnection(cls_com.gConn_String);
+                conn.Open();
+
+                cmd = new SqlCommand("S_a201_제품_사진_저장", conn);
+                // UploadFile이라는 이름의 스토어드 프로시져인것으로 가정합니다.
+
+                cmd.CommandType = CommandType.StoredProcedure;
+                pTP = new SqlParameter("@v_tp", SqlDbType.VarChar, 250);
+                pTP.Value = "1";
+                p관리사 = new SqlParameter("@v_관리사", SqlDbType.VarChar, 250);
+                p관리사.Value = cls_com.s사용자.관리사;
+                p거래처 = new SqlParameter("@v_거래처", SqlDbType.VarChar, 250);
+                p거래처.Value = cls_com.s사용자.거래처;
+                p제품코드 = new SqlParameter("@v_제품코드", SqlDbType.VarChar, 250);
+                p제품코드.Value = 제품코드;
+
+                p사진 = new SqlParameter("@v_사진", SqlDbType.Image);
+                p사진.Value = bytes;
+                cmd.Parameters.Add(pTP);
+                cmd.Parameters.Add(p관리사);
+                cmd.Parameters.Add(p거래처);
+                cmd.Parameters.Add(p제품코드);
+                cmd.Parameters.Add(p사진);
+                cmd.ExecuteNonQuery();
+                cmd.Dispose();
+                conn.Close();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
+
+        }
         private void 수정()
         {
-
+            string 제품코드 = "";
             DialogResult dr = MessageBox.Show("수정 하시겠습니까 ?", "데이타 수정", MessageBoxButtons.YesNo);
             if (dr == System.Windows.Forms.DialogResult.No) return;
             int i;
@@ -204,12 +264,52 @@ namespace Label_Package
                 if (!ds.Tables[0].Rows[0]["msg"].ToString().Equals(""))
                 {
                     MessageBox.Show(ds.Tables[0].Rows[0]["msg"].ToString());
+                } else
+                {
+                    제품코드 = spr0.ActiveSheet.Cells[0, 1].Text;
+                    그림저장2(제품코드, pic사진.Image);
+
                 }
 
             }
             조회();
         }
         private void 삭제()
+        {
+            string 제품코드 = "";
+            if (MessageBox.Show("삭제 하시겠습니까 ? ", "사용자 삭제", MessageBoxButtons.YesNo) == DialogResult.No) return;
+            int i;
+            sql = " ";
+            sql = sql + "EXEC [s_a201_제품_저장] '3'";
+            sql = sql + "   ,'" + cmb관리사.Text + "' ";
+            sql = sql + "   ,'" + cmb거래처.Text + "' ";
+            for (i = 0; i < spr0.ActiveSheet.RowCount; i++)
+            {
+                sql = sql + "   ,'" + spr0.ActiveSheet.Cells[i, 1].Text + "' ";
+            }
+            for (; i < cls_com.g필드수; i++)
+            {
+                sql = sql + "   ,'" + "" + "' ";
+            }
+            DataSet ds = cls_com.Select_Query(sql);
+
+            if (ds == null) return;
+            if (ds.Tables[0].Rows.Count > 0)
+            {
+                if (!ds.Tables[0].Rows[0]["msg"].ToString().Equals(""))
+                {
+                    MessageBox.Show(ds.Tables[0].Rows[0]["msg"].ToString());
+                } else
+                {
+                    제품코드 = spr0.ActiveSheet.Cells[0, 1].Text;
+                    그림삭제(제품코드);
+
+                }
+
+            }
+            조회(); 
+        }
+        private void 그림삭제(string 제품코드)
         {
 
             if (MessageBox.Show("삭제 하시겠습니까 ? ", "사용자 삭제", MessageBoxButtons.YesNo) == DialogResult.No) return;
@@ -235,9 +335,15 @@ namespace Label_Package
                 {
                     MessageBox.Show(ds.Tables[0].Rows[0]["msg"].ToString());
                 }
+                else
+                {
+                    제품코드 = spr0.ActiveSheet.Cells[0, 1].Text;
+                    그림삭제(제품코드);
+
+                }
 
             }
-            조회(); 
+            조회();
         }
 
 
@@ -262,9 +368,33 @@ namespace Label_Package
                 {
                     spr0.ActiveSheet.Cells[i, 1].Text = spr.ActiveSheet.Cells[e.Row, i].Text;
                 }
+                그림_불러오기(spr0.ActiveSheet.Cells[0, 1].Text); 
             } catch
             {
 
+            }
+
+        }
+        private void 그림_불러오기(string 제품코드)
+        {
+
+            pic사진.Image = null;
+            try
+            {
+                sql = "EXEC s_A201_제품_사진_조회 '1','" + cls_com.s사용자.관리사 + "','" + cls_com.s사용자.거래처 + "','" + 제품코드  + "' ";
+                DataSet ds = cls_com.Select_Query(sql);
+
+                pic사진.Image = null;
+                if (ds == null) return;
+
+                ImageConverter ImageConvert = new ImageConverter();
+                Image img;
+                img = (Image)ImageConvert.ConvertFrom(ds.Tables[0].Rows[0]["사진"]);
+
+                pic사진.Image = img;
+            }
+            catch
+            {
             }
 
         }
@@ -401,6 +531,28 @@ namespace Label_Package
         private void sc_SplitterMoved(object sender, SplitterEventArgs e)
         {
             cls_com.ConfigSave(this.Name + "_넓이", sc.SplitterDistance.ToString());
+        }
+
+        private void btn사진_Click(object sender, EventArgs e)
+        {
+            사진_불러오기();
+        }
+        private void 사진_불러오기()
+        {
+            var dialog = new OpenFileDialog();
+
+            dialog.Title = "Open Image";
+            dialog.Filter = "All Images|*.BMP;*.DIB;*.RLE;*.JPG;*.JPEG;*.JPE;*.JFIF;*.GIF;*.TIF;*.TIFF;*.PNG";
+
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                Image r사진 = Image.FromFile(dialog.FileName);
+                pic사진.Image = cls_com.사진_맞춤(pic사진, r사진);
+                //        cls_com.사진_저장(r사진);
+
+            }
+
+            dialog.Dispose();
         }
     }
 }

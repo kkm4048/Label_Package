@@ -37,6 +37,7 @@ namespace Label_Package
         public static string gOKFile = Environment.CurrentDirectory + "\\OK.wav";
         public static string gFailFile = Environment.CurrentDirectory + "\\Fail.wav";
         public static string gPath_폼 = Environment.CurrentDirectory + "\\폼";
+        public static string gPath_그림 = Environment.CurrentDirectory + "\\그림";
         public static string gLog_Path = Environment.CurrentDirectory + "\\Log";
         public static string g파일_자동출력 = gPath + "\\자동출력.xml";
         public static string g파일_자동출프로그램 = gPath + "\\syst_label_package_login.exe";

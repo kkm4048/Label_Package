@@ -406,8 +406,28 @@ namespace Label_Package
             DataSet ds = cls_com.Select_Query(sql);
 
             d = ds.GetXml();
+            사진생성(txt1.Text);
             return d;
 
+        }
+
+        private void 사진생성(string 제품코드)
+        {
+            try
+            {
+                sql = "EXEC s_A201_제품_사진_조회 '1','" + cls_com.s사용자.관리사 + "','" + cls_com.s사용자.거래처 + "','" + 제품코드 + "' ";
+                DataSet ds = cls_com.Select_Query(sql);
+
+                if (ds == null) return;
+
+                ImageConverter ImageConvert = new ImageConverter();
+                Image img;
+                img = (Image)ImageConvert.ConvertFrom(ds.Tables[0].Rows[0]["사진"]);
+                img.Save(cls_com.gPath_그림 + "\\" + 제품코드 + ".jpg");
+            }
+            catch
+            {
+            }
         }
 
         private void 라벨출력프로그램()

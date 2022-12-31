@@ -58,7 +58,8 @@
             this.spr0_Sheet1 = new FarPoint.Win.Spread.SheetView();
             this.pan버튼 = new System.Windows.Forms.Panel();
             this.lblCnt0 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
+            this.pic사진 = new System.Windows.Forms.PictureBox();
+            this.btn사진 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.spr)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.spr_Sheet1)).BeginInit();
             this.pan등록.SuspendLayout();
@@ -72,6 +73,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.spr0)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.spr0_Sheet1)).BeginInit();
             this.pan버튼.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pic사진)).BeginInit();
             this.SuspendLayout();
             // 
             // spr
@@ -82,7 +84,7 @@
             this.spr.Name = "spr";
             this.spr.Sheets.AddRange(new FarPoint.Win.Spread.SheetView[] {
             this.spr_Sheet1});
-            this.spr.Size = new System.Drawing.Size(576, 510);
+            this.spr.Size = new System.Drawing.Size(484, 510);
             this.spr.TabIndex = 98;
             this.spr.ColumnWidthChanged += new FarPoint.Win.Spread.ColumnWidthChangedEventHandler(this.spr_ColumnWidthChanged);
             this.spr.CellClick += new FarPoint.Win.Spread.CellClickEventHandler(this.spr_CellClick);
@@ -120,7 +122,7 @@
             this.pan등록.Location = new System.Drawing.Point(0, 0);
             this.pan등록.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.pan등록.Name = "pan등록";
-            this.pan등록.Size = new System.Drawing.Size(576, 55);
+            this.pan등록.Size = new System.Drawing.Size(484, 55);
             this.pan등록.TabIndex = 100;
             this.pan등록.Paint += new System.Windows.Forms.PaintEventHandler(this.pan데이타_Paint);
             // 
@@ -238,7 +240,7 @@
             // 
             this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDelete.Image = ((System.Drawing.Image)(resources.GetObject("btnDelete.Image")));
-            this.btnDelete.Location = new System.Drawing.Point(348, 14);
+            this.btnDelete.Location = new System.Drawing.Point(33, 128);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(90, 32);
             this.btnDelete.TabIndex = 43;
@@ -252,7 +254,7 @@
             // 
             this.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAdd.Image = ((System.Drawing.Image)(resources.GetObject("btnAdd.Image")));
-            this.btnAdd.Location = new System.Drawing.Point(170, 14);
+            this.btnAdd.Location = new System.Drawing.Point(33, 52);
             this.btnAdd.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(90, 32);
@@ -267,7 +269,7 @@
             // 
             this.btnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnEdit.Image = ((System.Drawing.Image)(resources.GetObject("btnEdit.Image")));
-            this.btnEdit.Location = new System.Drawing.Point(259, 14);
+            this.btnEdit.Location = new System.Drawing.Point(33, 91);
             this.btnEdit.Name = "btnEdit";
             this.btnEdit.Size = new System.Drawing.Size(90, 32);
             this.btnEdit.TabIndex = 41;
@@ -281,10 +283,10 @@
             // 
             this.btninit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btninit.Image = ((System.Drawing.Image)(resources.GetObject("btninit.Image")));
-            this.btninit.Location = new System.Drawing.Point(73, 14);
+            this.btninit.Location = new System.Drawing.Point(9, 7);
             this.btninit.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btninit.Name = "btninit";
-            this.btninit.Size = new System.Drawing.Size(90, 32);
+            this.btninit.Size = new System.Drawing.Size(84, 32);
             this.btninit.TabIndex = 40;
             this.btninit.Text = "   초기화";
             this.btninit.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -303,7 +305,7 @@
             this.pan관리사.Location = new System.Drawing.Point(0, 0);
             this.pan관리사.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.pan관리사.Name = "pan관리사";
-            this.pan관리사.Size = new System.Drawing.Size(476, 42);
+            this.pan관리사.Size = new System.Drawing.Size(568, 42);
             this.pan관리사.TabIndex = 102;
             // 
             // cmb관리사
@@ -346,7 +348,7 @@
             this.pan거래처.Location = new System.Drawing.Point(0, 42);
             this.pan거래처.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.pan거래처.Name = "pan거래처";
-            this.pan거래처.Size = new System.Drawing.Size(476, 42);
+            this.pan거래처.Size = new System.Drawing.Size(568, 42);
             this.pan거래처.TabIndex = 103;
             // 
             // cmb거래처
@@ -397,7 +399,7 @@
             this.sc.Panel2.Controls.Add(this.spr);
             this.sc.Panel2.Controls.Add(this.pan등록);
             this.sc.Size = new System.Drawing.Size(1056, 565);
-            this.sc.SplitterDistance = 476;
+            this.sc.SplitterDistance = 568;
             this.sc.TabIndex = 104;
             this.sc.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.sc_SplitterMoved);
             // 
@@ -405,11 +407,11 @@
             // 
             this.spr0.AccessibleDescription = "sprList, Sheet1, Row 0, Column 0, ";
             this.spr0.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.spr0.Location = new System.Drawing.Point(0, 160);
+            this.spr0.Location = new System.Drawing.Point(0, 258);
             this.spr0.Name = "spr0";
             this.spr0.Sheets.AddRange(new FarPoint.Win.Spread.SheetView[] {
             this.spr0_Sheet1});
-            this.spr0.Size = new System.Drawing.Size(476, 405);
+            this.spr0.Size = new System.Drawing.Size(568, 307);
             this.spr0.TabIndex = 105;
             this.spr0.ColumnWidthChanged += new FarPoint.Win.Spread.ColumnWidthChangedEventHandler(this.spr0_ColumnWidthChanged);
             // 
@@ -437,8 +439,9 @@
             // 
             this.pan버튼.BackColor = System.Drawing.Color.WhiteSmoke;
             this.pan버튼.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pan버튼.Controls.Add(this.btn사진);
+            this.pan버튼.Controls.Add(this.pic사진);
             this.pan버튼.Controls.Add(this.lblCnt0);
-            this.pan버튼.Controls.Add(this.label13);
             this.pan버튼.Controls.Add(this.btnDelete);
             this.pan버튼.Controls.Add(this.btninit);
             this.pan버튼.Controls.Add(this.btnAdd);
@@ -447,26 +450,39 @@
             this.pan버튼.Location = new System.Drawing.Point(0, 84);
             this.pan버튼.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.pan버튼.Name = "pan버튼";
-            this.pan버튼.Size = new System.Drawing.Size(476, 76);
+            this.pan버튼.Size = new System.Drawing.Size(568, 174);
             this.pan버튼.TabIndex = 104;
             // 
             // lblCnt0
             // 
             this.lblCnt0.AutoSize = true;
-            this.lblCnt0.Location = new System.Drawing.Point(7, 37);
+            this.lblCnt0.Location = new System.Drawing.Point(7, 158);
             this.lblCnt0.Name = "lblCnt0";
             this.lblCnt0.Size = new System.Drawing.Size(11, 12);
             this.lblCnt0.TabIndex = 99;
             this.lblCnt0.Text = "0";
             // 
-            // label13
+            // pic사진
             // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(7, 121);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(11, 12);
-            this.label13.TabIndex = 98;
-            this.label13.Text = "0";
+            this.pic사진.Location = new System.Drawing.Point(129, 3);
+            this.pic사진.Name = "pic사진";
+            this.pic사진.Size = new System.Drawing.Size(425, 164);
+            this.pic사진.TabIndex = 100;
+            this.pic사진.TabStop = false;
+            // 
+            // btn사진
+            // 
+            this.btn사진.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn사진.Location = new System.Drawing.Point(99, 7);
+            this.btn사진.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btn사진.Name = "btn사진";
+            this.btn사진.Size = new System.Drawing.Size(24, 32);
+            this.btn사진.TabIndex = 101;
+            this.btn사진.Text = "...";
+            this.btn사진.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btn사진.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btn사진.UseVisualStyleBackColor = true;
+            this.btn사진.Click += new System.EventHandler(this.btn사진_Click);
             // 
             // frm기초데이타_제품등록
             // 
@@ -499,6 +515,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.spr0_Sheet1)).EndInit();
             this.pan버튼.ResumeLayout(false);
             this.pan버튼.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pic사진)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -531,9 +548,10 @@
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.SplitContainer sc;
         private System.Windows.Forms.Panel pan버튼;
-        private System.Windows.Forms.Label label13;
         private FarPoint.Win.Spread.FpSpread spr0;
         private FarPoint.Win.Spread.SheetView spr0_Sheet1;
         private System.Windows.Forms.Label lblCnt0;
+        private System.Windows.Forms.Button btn사진;
+        private System.Windows.Forms.PictureBox pic사진;
     }
 }
